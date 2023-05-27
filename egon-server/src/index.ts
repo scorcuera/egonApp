@@ -1,14 +1,10 @@
-import express from "express";
+import { App } from "./app";
+import * as dotenv from "dotenv";
+dotenv.config();
 
-const app = express();
-const PORT = 3000;
+function main() {
+    const app = new App();
+    app.listen();
+}
 
-app.use(express.json());
-
-app.get("/", (req: any, res: any) => {
-    console.log("holi");
-})
-
-app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
-})
+main();
