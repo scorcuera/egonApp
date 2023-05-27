@@ -1,4 +1,5 @@
 import express, { Application } from "express";
+import IndexRoutes from "./routes/index.routes";
 
 export class App {
     private app: Application;
@@ -7,6 +8,8 @@ export class App {
     constructor(port?: number | string) {
         this.app = express();
         this.port = port;
+        this.settings();
+        this.routes();
     }
 
     settings() {
@@ -15,7 +18,7 @@ export class App {
     }
 
     routes() {
-
+        this.app.use(IndexRoutes);
     }
 
     listen() {
