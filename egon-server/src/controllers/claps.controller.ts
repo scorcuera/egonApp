@@ -32,3 +32,14 @@ export async function getAllReceivedClaps (req: Request, res: Response): Promise
         console.log(e);
     }
 }
+
+export async function sendClaps (req: Request, res: Response): Promise<Response | void> {
+    try {
+        let newClaps = req.body;
+        let connection = await connect();
+        await connection.query(`INSERT INTO claps (FromUserId, ToUserId, ClapCount, Message) VALUES ('${newClaps.sender}', '${newClaps.recipient}', '${newClaps.clapCount}', '${newClaps.message}')`);
+        return res.json('Claps sent succesfully !');
+    } catch (e) {
+        console.log(e);
+    }
+}
