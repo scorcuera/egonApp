@@ -1,5 +1,6 @@
 import express, { Application } from "express";
 import IndexRoutes from "./routes/index.routes";
+import ClapRoutes from "./routes/claps.routes";
 
 export class App {
     private app: Application;
@@ -19,6 +20,7 @@ export class App {
 
     routes() {
         this.app.use(IndexRoutes);
+        this.app.use("/claps", ClapRoutes)
     }
 
     listen() {
