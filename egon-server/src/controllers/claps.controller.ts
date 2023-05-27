@@ -20,5 +20,15 @@ export async function getAllSentClaps (req: Request, res: Response): Promise<Res
     } catch (e) {
         console.log(e);
     }
-   
+}
+
+export async function getAllReceivedClaps (req: Request, res: Response): Promise<Response | void> {
+    try {
+        let recipientId = req.params.id;
+        let connection = await connect();
+        let claps = await connection.query(`SELECT * FROM claps WHERE ToUserId = ${recipientId}`);
+        return res.json(claps[0]);
+    } catch(e) {
+        console.log(e);
+    }
 }
