@@ -1,12 +1,12 @@
-import { createPool, Pool } from 'mysql2/promise';
+import { Sequelize } from "sequelize";
+import * as dotenv from "dotenv";
+dotenv.config();
 
-export async function connect(): Promise<Pool> {
-    const connection = await createPool({
-        host: process.env.DB_HOST,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_NAME,
-        connectionLimit: 10
-    })
-    return connection;
-}
+const DB_NAME = process.env.DB_NAME || '';
+const DB_USER = process.env.DB_USER || '';
+const DB_PASSWORD = process.env.DB_PASSWORD || '';
+
+export const connection = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
+    host: 'localhost',
+    dialect: 'mysql',
+});
