@@ -1,7 +1,7 @@
-import { Server } from "./models/server.model";
+import { ServerModel } from "./models/server.model";
 
 function main() {
-    const app = new Server();
+    const app = new ServerModel();
     app.listen();
 }
 

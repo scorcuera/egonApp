@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import { Clap } from "../models/clap.model";
+import { ClapModel } from "../models/clap.model";
 
 export async function getAllClaps(req: Request, res: Response): Promise<Response | void> {
     try {
-        const claps = await Clap.findAll();
+        const claps = await ClapModel.findAll();
         return res.json(claps);
     } catch (e) {
         console.log(e);
@@ -13,7 +13,7 @@ export async function getAllClaps(req: Request, res: Response): Promise<Response
 export async function getAllSentClaps (req: Request, res: Response): Promise<Response | void> {
     try {       
         const senderId = req.params.id;
-        const claps = await Clap.findOne({
+        const claps = await ClapModel.findOne({
             where: {
                 FromUserId: senderId
             }
@@ -27,7 +27,7 @@ export async function getAllSentClaps (req: Request, res: Response): Promise<Res
 export async function getAllReceivedClaps (req: Request, res: Response): Promise<Response | void> {
     try {
         const recipientId = req.params.id;
-        const claps = await Clap.findOne({
+        const claps = await ClapModel.findOne({
             where: {
                 ToUserId: recipientId
             }
@@ -41,7 +41,7 @@ export async function getAllReceivedClaps (req: Request, res: Response): Promise
 export async function sendClaps (req: Request, res: Response): Promise<Response | void> {
     try {
         const newClaps = req.body;
-        await Clap.create(newClaps);
+        await ClapModel.create(newClaps);
         return res.json('Claps sent succesfully !');
     } catch (e) {
         console.log(e);

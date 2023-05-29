@@ -1,9 +1,10 @@
 import express, { Application } from "express";
 import IndexRoutes from "../routes/index.routes";
 import ClapRoutes from "../routes/claps.routes";
+import AuthRoutes from "../routes/auth.routes";
 import { connection } from "../database/database";
 
-export class Server {
+export class ServerModel {
     private app: Application;
     private port?: number | string;
 
@@ -23,6 +24,7 @@ export class Server {
     routes() {
         this.app.use(IndexRoutes);
         this.app.use("/claps", ClapRoutes)
+        this.app.use("/auth", AuthRoutes);
     }
 
     listen() {
