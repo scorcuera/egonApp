@@ -1,9 +1,9 @@
 import express, { Application } from "express";
-import IndexRoutes from "./routes/index.routes";
-import ClapRoutes from "./routes/claps.routes";
-import { connection } from "./database";
+import IndexRoutes from "../routes/index.routes";
+import ClapRoutes from "../routes/claps.routes";
+import { connection } from "../database";
 
-export class App {
+export class Server {
     private app: Application;
     private port?: number | string;
 
