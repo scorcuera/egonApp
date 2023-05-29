@@ -1,26 +1,46 @@
+import { Auth } from "../interfaces/auth.interface";
 import { UserModel } from "../models/user.model";
+import { encrypt, verify } from "../utils/password.handler";
 
 type NewUser = {
     Username: string,
     UserEmail: string,
-    Password: number,
+    Password: string,
     UserRole: string,
     ClapsAvailable: number
 }
 
-const registerNewUser = async (authUser: NewUser) => {
-    console.log(authUser);
+async function registerNewUser (authUser: NewUser) {
     const isRegistered = await UserModel.findOne({
         where: {
             UserEmail: authUser.UserEmail
         }
     });
     if (!isRegistered) {
-        await UserModel.create(authUser);
+        const passwordHash = await encrypt(authUser.Password);
+        await UserModel.create({...authUser, Password: passwordHash});
         return "New user registered succesfully !"
     }
     return "This user already exists";
 }
-// const logInUser = async () => {}
 
-export { registerNewUser };
+async function logInUser (user: Auth) {
+    const isRegistered = await UserModel.findOne({
+        where: {
+            UserEmail: user.UserEmail
+        }
+    });
+    if (!isRegistered) {
+        return "Not found user";
+    }
+    const passwordHash = isRegistered.get('Password') as string;
+    const isCorrectPassword = verify(user.Password, passwordHash);
+
+    if (!isCorrectPassword) {
+        return "Invalid Password";
+    }
+
+    return isRegistered;  
+}
+
+export { registerNewUser, logInUser };
