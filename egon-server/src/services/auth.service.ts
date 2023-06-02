@@ -1,5 +1,6 @@
 import { Auth } from "../interfaces/auth.interface";
 import { UserModel } from "../models/user.model";
+import { generateToken } from "../utils/jwt.handler";
 import { encrypt, verify } from "../utils/password.handler";
 
 type NewUser = {
@@ -40,7 +41,13 @@ async function logInUser (user: Auth) {
         return "Invalid Password";
     }
 
-    return isRegistered;  
+    const token = await generateToken(isRegistered.get("UserId") as number);
+    const data = {
+        token,
+        isRegistered
+    }
+
+    return data;  
 }
 
 export { registerNewUser, logInUser };
