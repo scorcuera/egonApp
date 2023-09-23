@@ -9,6 +9,11 @@ export async function generateToken(id: number) {
 }
 
 export async function verifyToken(jwt: string) {
-    const isValid = verify(jwt, JWT_SECRET);
-    return isValid;
+    try {
+        const isValid = verify(jwt, JWT_SECRET);
+        return isValid;
+    } catch (error) {
+        console.error("JWT Verification Error:", error);
+        return false;
+    }
 }
