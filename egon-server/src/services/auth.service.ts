@@ -11,21 +11,21 @@ type NewUser = {
     ClapsAvailable: number
 }
 
-async function registerNewUser (authUser: NewUser) {
+async function registerNewUser(authUser: NewUser) {
     const isRegistered = await UserModel.findOne({
         where: {
             UserEmail: authUser.UserEmail
         }
     });
-    if (!isRegistered) {
-        const passwordHash = await encrypt(authUser.Password);
-        await UserModel.create({...authUser, Password: passwordHash});
-        return "New user registered succesfully !"
+    if (isRegistered) {
+        return "This user already exists";
     }
-    return "This user already exists";
+    const passwordHash = await encrypt(authUser.Password);
+    await UserModel.create({ ...authUser, Password: passwordHash });
+    return "New user registered succesfully !"
 }
 
-async function logInUser (user: Auth) {
+async function logInUser(user: Auth) {
     const isRegistered = await UserModel.findOne({
         where: {
             UserEmail: user.UserEmail
@@ -47,7 +47,7 @@ async function logInUser (user: Auth) {
         isRegistered
     }
 
-    return data;  
+    return data;
 }
 
 export { registerNewUser, logInUser };

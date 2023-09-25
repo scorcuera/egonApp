@@ -12,7 +12,6 @@ export async function checkJWT(req: Request, res: Response , next: NextFunction)
     try {
         const jwtByUser = req.headers.authorization || "";
         const jwt = jwtByUser.split(" ").pop() || "";
-        console.log(jwt)
         const jwtPayload = await verifyToken(jwt) as JwtPayload;
         if (!jwtPayload) {
             res.status(401);
