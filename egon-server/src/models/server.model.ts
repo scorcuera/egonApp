@@ -1,4 +1,5 @@
 import express, { Application } from "express";
+import cors from 'cors';
 import IndexRoutes from "../routes/index.routes";
 import ClapRoutes from "../routes/claps.routes";
 import AuthRoutes from "../routes/auth.routes";
@@ -19,6 +20,7 @@ export class ServerModel {
     settings() {
         this.app.set("port", this.port || process.env.PORT || 3000);
         this.app.use(express.json());
+        this.app.use(cors());
     }
 
     routes() {
