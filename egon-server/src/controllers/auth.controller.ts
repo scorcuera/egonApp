@@ -15,7 +15,7 @@ export async function logIn (req: Request, res: Response): Promise<Response | vo
     try {
         const newUser = req.body;
         const responseUser = await logInUser(newUser);
-        return res.json(responseUser)
+        return res.json(responseUser);
     } catch(e) {
         console.log(e)
     }
