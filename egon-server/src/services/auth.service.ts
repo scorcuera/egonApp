@@ -42,9 +42,12 @@ async function logInUser(user: Auth) {
     }
 
     const token = await generateToken(isRegistered.get("UserId") as number);
+    const userEmail = isRegistered.get("UserEmail");
+    const userId = isRegistered.get("UserId");
     const data = {
         token,
-        isRegistered
+        userId,
+        userEmail
     }
 
     return data;
