@@ -1,5 +1,5 @@
 import AuthUser from "../../interfaces/user.interface.ts";
-import authService from "../../services/auth.ts";
+import loginHandler from "../handlers/loginHandler.tsx";
 
 import { useForm } from "react-hook-form";
 
@@ -7,7 +7,7 @@ const Login = () => {
     const { register, handleSubmit } = useForm();
 
     const handleLogIn = async (data: AuthUser) => {
-        await authService.loginUser(data);
+        await loginHandler(data);
     }
 
   return (

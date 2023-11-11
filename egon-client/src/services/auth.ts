@@ -1,10 +1,9 @@
-import AuthUser from "../interfaces/user.interface";
+import AuthUser from "../../interfaces/user.interface";
 
-const API_URL = "http://localhost:3000/auth/login";
 
 const authService = {
     async loginUser(user: AuthUser) {
-        const loggedInUser = await fetch(API_URL, {             
+        const loggedInUser = await fetch("http://localhost:3000/auth/login", {             
             method: 'POST', 
             body: JSON.stringify(user), 
             headers: {
@@ -12,8 +11,8 @@ const authService = {
             },
         });
         const result = await loggedInUser.json();
-        console.log(result);
-        return loggedInUser;
+        console.log(result)
+        return result;
     }
 }
 
