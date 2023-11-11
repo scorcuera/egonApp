@@ -35,7 +35,8 @@ async function logInUser(user: Auth) {
         return "Not found user";
     }
     const passwordHash = isRegistered.get('Password') as string;
-    const isCorrectPassword = verify(user.Password, passwordHash);
+    const isCorrectPassword = await verify(user.Password, passwordHash);
+
 
     if (!isCorrectPassword) {
         return "Invalid Password";

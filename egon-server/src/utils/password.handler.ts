@@ -6,7 +6,7 @@ async function encrypt(password: string) {
 }
  
 async function verify (password: string, passwordHash: string) {
-    const isValid = compare(password, passwordHash);
+    const isValid = await compare(password, passwordHash);
     return isValid;
 }
 
