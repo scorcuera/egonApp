@@ -1,13 +1,14 @@
+import { AuthContext } from "../contexts/auth.context.tsx";
 import AuthUser from "../../interfaces/user.interface.ts";
-import loginHandler from "../handlers/loginHandler.tsx";
-
 import { useForm } from "react-hook-form";
+import { useContext } from "react";
 
 const Login = () => {
     const { register, handleSubmit } = useForm();
+    const { logInUser } = useContext(AuthContext);
 
     const handleLogIn = async (data: AuthUser) => {
-        await loginHandler(data);
+        logInUser(data);
     }
 
   return (
