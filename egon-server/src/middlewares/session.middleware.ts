@@ -8,7 +8,7 @@ type JwtPayload= {
     exp: number;
 }
 
-export async function checkJWT(req: Request, res: Response , next: NextFunction) {
+export async function isAdmin(req: Request, res: Response , next: NextFunction) {
     try {
         const jwtByUser = req.headers.authorization || "";
         const jwt = jwtByUser.split(" ").pop() || "";
