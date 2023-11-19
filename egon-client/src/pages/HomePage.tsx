@@ -3,9 +3,9 @@ import "./HomePage.css";
 
 const HomePage = () => {
   return (
-    <section className="heroContainer">
+    <div className="heroContainer">
       <img className="heroContainer__image" src={IconLogo} alt="logo-image" />
-    </section>
+    </div>
   )
 }
 

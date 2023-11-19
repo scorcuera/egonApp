@@ -3,6 +3,7 @@ import AuthUser from "../../interfaces/user.interface.ts";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import "./Login.css";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
@@ -19,18 +20,29 @@ const Login = () => {
   }
 
   return (
-    <div>
-      <form action="" onSubmit={handleSubmit(handleLogIn)}>
-        <label>User email</label>
-        <input type="text" {...register("UserEmail")} />
-        <br />
-        <br />
-        <label>Password</label>
-        <input type="text" {...register("Password")} />
-        <br />
-        <button type="submit">Log in</button>
+    <div className="form__container">
+      <div className="form__image">
+
+      </div>
+      <form className="form__element" action="" onSubmit={handleSubmit(handleLogIn)}>
+        <div className="form__message">
+          <p>Welcome !</p>
+          <p>Enter your details to sign in</p>
+        </div>
+        <div className="form__input-container">
+          <div className="form__input">
+            <label>User email</label>
+            <input type="text" {...register("UserEmail")} />
+          </div>
+          <div className="form__input">
+            <label>Password</label>
+            <input type="text" {...register("Password")} />
+          </div>
+        </div>
+        <button className="form__submit-btn" type="submit">Log in</button>
       </form>
     </div>
+
   )
 }
 
