@@ -1,0 +1,21 @@
+.navbar__container {
+    height: 10vh;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 4rem;
+}
+
+.navbar__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #0837AD;
+    text-decoration: none;
+    padding: 0 2rem;
+}
+
+.navbar__link:hover {
+    background-color: #0837AD;
+    color: #EFF1F7;
+}
