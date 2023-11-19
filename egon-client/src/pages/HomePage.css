@@ -1,0 +1,10 @@
+.heroContainer {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.heroContainer__image {
+    width: 50rem;
+}
