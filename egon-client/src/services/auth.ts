@@ -11,7 +11,6 @@ const authService = {
             },
         });
         const result = await loggedInUser.json();
-        console.log(result)
         return result;
     }
 }

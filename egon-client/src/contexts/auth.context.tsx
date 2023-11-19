@@ -20,6 +20,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const logInUser = async (data: AuthUser) => {
         const userData = await loginHandler(data);
         setUser(userData);
+        return userData;
     }
 
     const logOutUser = () => {
