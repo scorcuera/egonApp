@@ -5,14 +5,11 @@ import "./Navbar.css";
 const Navbar = () => {
   return (
     <nav className="navbar__container">
-        <Link to="/" className="navbar__link">
-            Home
-        </Link>
         <Link to="login" className="navbar__link">
             Sign In
         </Link>
-        <Link to="login" className="navbar__link">
-            Sign Up
+        <Link to="login" className="navbar__link navbar__link--primary">
+            Start
         </Link>
     </nav>
   )

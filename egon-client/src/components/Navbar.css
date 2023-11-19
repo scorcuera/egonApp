@@ -2,6 +2,7 @@
     height: 10vh;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     padding-right: 4rem;
 }
 
@@ -9,13 +10,26 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
-    color: #0837AD;
+    height: 50%;
+    color: black;
     text-decoration: none;
     padding: 0 2rem;
+    margin: 0 1rem;
+    font-size: 1.3rem;
+    transition: 0.4s;
+}
+
+.navbar__link--primary {
+    background-color: #0837AD;
+    color: #EFF1F7;
+    border-radius: 10px;
 }
 
 .navbar__link:hover {
-    background-color: #0837AD;
+    color: #0837AD;
+}
+
+.navbar__link--primary:hover {
     color: #EFF1F7;
+    transform: scale(1.1);
 }

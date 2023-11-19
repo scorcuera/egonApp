@@ -4,12 +4,12 @@
 }
 
 .form__image {
-    width: 50vw;
+    width: 40vw;
     background-color: #0837AD;
 }
 
 .form__element {
-    width: 50vw;
+    width: 60vw;
     height: 80%;
     align-self: center;
     display: flex;
