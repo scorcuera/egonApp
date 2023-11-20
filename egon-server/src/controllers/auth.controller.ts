@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { registerNewUser, logInUser } from "../services/auth.service";
+import { registerNewUser, logInUser, checkUserFromJwt } from "../services/auth.service";
 
 export async function registerUser (req: Request, res: Response): Promise<Response | void> {
     try {
@@ -18,5 +18,16 @@ export async function logIn (req: Request, res: Response): Promise<Response | vo
         return res.json(responseUser);
     } catch(e) {
         console.log(e)
+    }
+}
+
+export async function checkUser (req: Request, res: Response) {
+    try {
+        const jwtByUser = req.headers.authorization || "";
+        const jwt = jwtByUser.split(" ").pop() || "";
+        const userData = await checkUserFromJwt(jwt);
+        return res.json(userData);
+    }catch (e) {
+        console.log(e);
     }
 }
