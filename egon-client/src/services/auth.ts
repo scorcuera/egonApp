@@ -14,7 +14,6 @@ const authService = {
         return result;
     },
     async checkUser(token: string) {
-        console.log(token);
         const response = await fetch ("http://localhost:3000/auth/checkUser",
         {
             headers: { Authorization: `Bearer: ${token}`}

@@ -24,15 +24,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
         if (storedToken) {
             const userData = await authService.checkUser(storedToken);
-            console.log(userData);
             setUser(userData);
         }
     }
 
     const logInUser = async (data: AuthUser) => {
-        const userData = await loginHandler(data);
-        setUser(userData);
-        return userData;
+        await loginHandler(data);
+        await checkUser();
     }
 
     const logOutUser = () => {
@@ -42,7 +40,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     useEffect(() => {
         checkUser();
-    }, [user])
+    }, [])
 
     return (
         <AuthContext.Provider value={{ user, logInUser, logOutUser }}>
