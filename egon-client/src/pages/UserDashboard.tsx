@@ -1,14 +1,17 @@
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../contexts/auth.context"
 
 const UserDashboard = () => {
-    const { user } = useContext(AuthContext);
-    useEffect(() => {
-        console.log(user)
-    }, [user])
+  const [userData, setUserData] = useState({});
+  const { user } = useContext(AuthContext);
+  
+  useEffect(() => {
+    return setUserData(user);
+  }, [user])
+  
   return (
     <div>
-        This is the user dashboard
+      Hello {userData.userName}
     </div>
   )
 }

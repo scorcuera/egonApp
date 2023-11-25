@@ -4,9 +4,10 @@ import authService from "../services/auth";
 const loginHandler = async (authUser: AuthUser) => {
     const result = await authService.loginUser(authUser);
     if (result.token) {
+        localStorage.setItem('authToken', result.token);
         return result;
     }
-    localStorage.setItem('authToken', result.token);
+    return undefined;
 }
 
 export default loginHandler;
