@@ -1,5 +1,5 @@
 import { AuthContext } from "../contexts/auth.context.tsx";
-import AuthUser from "../../interfaces/user.interface.ts";
+import { AuthUser } from "../interfaces/user.interface.ts";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";

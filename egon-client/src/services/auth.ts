@@ -1,4 +1,4 @@
-import AuthUser from "../../interfaces/user.interface";
+import { AuthUser } from "../interfaces/user.interface";
 
 
 const authService = {
