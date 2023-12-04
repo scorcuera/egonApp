@@ -20,7 +20,7 @@ const Navbar = () => {
           </Link>
         </>
       )}
-      {!user.userName && (
+      {!user?.userName  && (
         <>
           <Link to="login" className="navbar__link">
             Sign In

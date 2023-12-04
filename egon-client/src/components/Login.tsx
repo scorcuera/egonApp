@@ -10,7 +10,7 @@ const Login = () => {
   const { logInUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleLogIn = async (data: AuthUser) => {
+  const handleLogIn = async (data: AuthUser) : Promise<void> => {
     const isLoggedIn = await logInUser(data);
     console.log(isLoggedIn);
     if (isLoggedIn == undefined) {

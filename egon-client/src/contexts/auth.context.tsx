@@ -1,29 +1,29 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
 import loginHandler from "../handlers/loginHandler";
-import AuthUser from "../../interfaces/user.interface.ts";
+import { User, AuthUser } from "../interfaces/user.interface.ts";
 import authService from "../services/auth.ts";
 
 interface AuthContextProps {
-    user: AuthUser | unknown;
+    user: User | null;
     logInUser: (data: AuthUser) => void;
     logOutUser: () => void;
 }
 
 export const AuthContext = createContext<AuthContextProps>({
-    user: {},
+    user: {} as User,
     logInUser: () => {},
     logOutUser: () => {},
   });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState<User | null>(null);
 
     const checkUser = async () => {
 
         const storedToken = localStorage.getItem("authToken")
 
         if (storedToken) {
-            const userData = await authService.checkUser(storedToken);
+            const userData : User = await authService.checkUser(storedToken);
             setUser(userData);
         }
     }
@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const logOutUser = () => {
         localStorage.removeItem("authToken");
-        setUser({});
+        setUser(null);
     }
 
     useEffect(() => {
