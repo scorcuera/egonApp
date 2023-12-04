@@ -6,9 +6,13 @@ const UserDashboard = () => {
 
   return (
     <>
-      {user && <p>Hello {user.userName}</p>}
+      {user && (
+        <>
+          <p>Hello {user.userName}</p>
+          <p>Available claps: {user.clapsAvailable}</p>
+        </>
+      )}
     </>
-
   )
 }
 
