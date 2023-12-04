@@ -1,5 +1,5 @@
 import { AuthUser } from "../interfaces/user.interface";
-import authService from "../services/auth";
+import authService from "../services/auth.service";
 
 const loginHandler = async (authUser: AuthUser) => {
     const result = await authService.loginUser(authUser);

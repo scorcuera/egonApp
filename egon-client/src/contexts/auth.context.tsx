@@ -1,7 +1,7 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
 import loginHandler from "../handlers/loginHandler";
 import { User, AuthUser } from "../interfaces/user.interface.ts";
-import authService from "../services/auth.ts";
+import authService from "../services/auth.service.ts";
 
 interface AuthContextProps {
     user: User | null;
