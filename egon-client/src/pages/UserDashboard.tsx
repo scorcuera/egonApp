@@ -1,10 +1,19 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { AuthContext } from "../contexts/auth.context"
 import clapService from "../services/claps.service";
+import ClapsBoard from "../components/ClapsBoard";
 import "./UserDashboard.css";
 
 const UserDashboard = () => {
   const { user } = useContext(AuthContext);
+  const [clapsModal, setClapsModal] = useState(false);
+  const [claps, setClaps] = useState([]);
+
+  const setModal = async (id: string) => {
+    const claps = await clapService.getAllReceivedClaps(id);
+    setClaps(claps);
+    setClapsModal(!clapsModal);
+  }
 
   return (
     <>
@@ -15,9 +24,10 @@ const UserDashboard = () => {
             <p className="dashboard__info__claps">Available claps: {user.clapsAvailable}</p>
           </div>
           <div className="dashboard__container__buttons">
-            <button className="dashboard__button" onClick={() => clapService.getAllReceivedClaps(user.userId)}>See my claps</button>
+            <button className="dashboard__button" onClick={() => setModal(user.userId)}>See my claps</button>
           <button className="dashboard__button dashboard__button--primary">Send claps</button>
           </div>
+          {clapsModal && <ClapsBoard claps={claps} />}
         </section>
       )}
     </>
