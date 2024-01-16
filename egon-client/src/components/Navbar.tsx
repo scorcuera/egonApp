@@ -10,7 +10,7 @@ const Navbar = () => {
 
   return (
     <nav className="navbar__container">
-      { user && user.userName && (
+      { user && user.userName ? (
         <>
           <Link to="/userDashboard" className="navbar__link">
             My profile
@@ -19,8 +19,7 @@ const Navbar = () => {
             Log out
           </Link>
         </>
-      )}
-      {!user?.userName  && (
+      ) : user == null ? null : (
         <>
           <Link to="login" className="navbar__link">
             Sign In
