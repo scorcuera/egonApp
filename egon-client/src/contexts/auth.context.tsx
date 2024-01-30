@@ -5,32 +5,41 @@ import authService from "../services/auth.service.ts";
 
 interface AuthContextProps {
     user: User | null;
-    logInUser: (data: AuthUser) => void;
+    logInUser: (data: AuthUser) => Promise<User|undefined>;
     logOutUser: () => void;
+    isLoading: boolean
 }
 
 export const AuthContext = createContext<AuthContextProps>({
     user: {} as User,
-    logInUser: () => {},
+    logInUser: async () => undefined,
     logOutUser: () => {},
+    isLoading: true
   });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUser] = useState<User | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     const checkUser = async () => {
-
-        const storedToken = localStorage.getItem("authToken")
-
-        if (storedToken) {
-            const userData : User = await authService.checkUser(storedToken);
-            setUser(userData);
+        setIsLoading(true)
+        const storedToken = localStorage.getItem("authToken");
+        if (!storedToken) {
+            setUser(null);
+            setIsLoading(false);
+            return;   
         }
+        const userData : User = await authService.checkUser(storedToken);
+        setUser(userData);
+        setIsLoading(false);
+        return userData;
     }
 
     const logInUser = async (data: AuthUser) => {
-        await loginHandler(data);
-        await checkUser();
+        const token = await loginHandler(data);
+        localStorage.setItem('authToken', token);
+        const userData = await checkUser();
+        return userData;
     }
 
     const logOutUser = () => {
@@ -43,7 +52,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }, [])
 
     return (
-        <AuthContext.Provider value={{ user, logInUser, logOutUser }}>
+        <AuthContext.Provider value={{ user, isLoading, logInUser, logOutUser }}>
             {children}
         </ AuthContext.Provider>
     )

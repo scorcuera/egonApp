@@ -6,11 +6,15 @@ import { AuthContext } from "../contexts/auth.context";
 
 const Navbar = () => {
 
-  const { user, logOutUser } = useContext(AuthContext);
+  const { user, logOutUser, isLoading } = useContext(AuthContext);
+
+  if (isLoading) {
+    return <nav className="navbar__container">Loading...</nav>;
+  }
 
   return (
     <nav className="navbar__container">
-      { user && user.userName ? (
+      {user && user.userName ? (
         <>
           <Link to="/userDashboard" className="navbar__link">
             My profile
@@ -19,7 +23,7 @@ const Navbar = () => {
             Log out
           </Link>
         </>
-      ) : user == null ? null : (
+      ) : (
         <>
           <Link to="login" className="navbar__link">
             Sign In

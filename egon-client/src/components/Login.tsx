@@ -11,13 +11,14 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogIn = async (data: AuthUser) : Promise<void> => {
-    const isLoggedIn = await logInUser(data);
-    console.log(isLoggedIn);
-    if (isLoggedIn == undefined) {
+    const userData = await logInUser(data);
+    if (!userData) {
       navigate("/login");
+    } else {
+      navigate("/userDashboard")
     }
-    navigate("/userDashboard")
   }
+
 
   return (
     <div className="form__container">
