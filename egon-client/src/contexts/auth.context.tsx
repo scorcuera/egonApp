@@ -22,11 +22,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [isLoading, setIsLoading] = useState(true);
 
     const checkUser = async () => {
-        setIsLoading(true)
         const storedToken = localStorage.getItem("authToken");
-        if (!storedToken) {
+        if (storedToken == undefined) {
             setUser(null);
-            setIsLoading(false);
+            setIsLoading(false)
             return;   
         }
         const userData : User = await authService.checkUser(storedToken);

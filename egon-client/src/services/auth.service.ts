@@ -1,6 +1,5 @@
 import { AuthUser } from "../interfaces/user.interface";
 
-
 const authService = {
     async loginUser(user: AuthUser) {
         const loggedInUser = await fetch("http://localhost:3000/auth/login", {             
