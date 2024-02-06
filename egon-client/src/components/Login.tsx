@@ -34,11 +34,11 @@ const Login = () => {
           <p>Enter your details to sign in</p>
         </div>
           <Stack spacing={6}>
-            <InputGroup size='md' w='md'>
+            <InputGroup w='md'>
               <InputLeftElement pointerEvents='none'>
                 <EmailIcon color='gray.300' />
               </InputLeftElement>
-              <Input type='tel' placeholder='Enter your email' {...register("UserEmail")} />
+              <Input type='tel' placeholder='Enter your email' {...register("UserEmail")} autoComplete="off" />
             </InputGroup>
             <InputGroup>
               <Input
@@ -46,6 +46,7 @@ const Login = () => {
                 type={show ? 'text' : 'password'}
                 placeholder='Enter password'
                 {...register("Password")}
+                autoComplete="off"
               />
               <InputRightElement width='4.5rem'>
                 <Button h='1.75rem' size='sm' onClick={handleClick}>
