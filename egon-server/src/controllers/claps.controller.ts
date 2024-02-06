@@ -27,7 +27,7 @@ export async function getAllSentClaps (req: Request, res: Response): Promise<Res
 export async function getAllReceivedClaps (req: Request, res: Response): Promise<Response | void> {
     try {
         const recipientId = req.params.id;
-        const claps = await ClapModel.findOne({
+        const claps = await ClapModel.findAll({
             where: {
                 ToUserId: recipientId
             }
