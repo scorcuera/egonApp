@@ -1,16 +1,20 @@
 import { AuthContext } from "../contexts/auth.context.tsx";
 import { AuthUser } from "../interfaces/user.interface.ts";
 import { useForm } from "react-hook-form";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Input, InputGroup, InputRightElement, InputLeftElement, Button, Stack } from '@chakra-ui/react';
+import { EmailIcon } from "@chakra-ui/icons";
 import "./Login.css";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const { logInUser } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [show, setShow] = useState(false);
+  const handleClick = () => setShow(!show)
 
-  const handleLogIn = async (data: AuthUser) : Promise<void> => {
+  const handleLogIn = async (data: AuthUser): Promise<void> => {
     const userData = await logInUser(data);
     if (!userData) {
       navigate("/login");
@@ -29,16 +33,28 @@ const Login = () => {
           <p>Welcome !</p>
           <p>Enter your details to sign in</p>
         </div>
-        <div className="form__input-container">
-          <div className="form__input">
-            <label>User email</label>
-            <input type="text" {...register("UserEmail")} />
-          </div>
-          <div className="form__input">
-            <label>Password</label>
-            <input type="text" {...register("Password")} />
-          </div>
-        </div>
+          <Stack spacing={6}>
+            <InputGroup size='md' w='md'>
+              <InputLeftElement pointerEvents='none'>
+                <EmailIcon color='gray.300' />
+              </InputLeftElement>
+              <Input type='tel' placeholder='Enter your email' {...register("UserEmail")} />
+            </InputGroup>
+            <InputGroup>
+              <Input
+                pr='4.5rem'
+                type={show ? 'text' : 'password'}
+                placeholder='Enter password'
+                {...register("Password")}
+              />
+              <InputRightElement width='4.5rem'>
+                <Button h='1.75rem' size='sm' onClick={handleClick}>
+                  {show ? 'Hide' : 'Show'}
+                </Button>
+              </InputRightElement>
+            </InputGroup>
+          </Stack>
+ 
         <button className="form__submit-btn" type="submit">Log in</button>
       </form>
     </div>
@@ -47,3 +63,4 @@ const Login = () => {
 }
 
 export default Login
+
