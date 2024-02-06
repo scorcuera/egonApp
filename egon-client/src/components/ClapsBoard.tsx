@@ -22,12 +22,15 @@ const ClapsBoard = ({ claps }) => {
           </Tr>
         </Thead>
         <Tbody>
-          <Tr>
-            <Td isNumeric>{claps.ClapCount}</Td>
-            <Td>{claps.FromUserId}</Td>
-            <Td>{claps.Message}</Td>
-            <Td>{claps.Date}</Td>
-          </Tr>
+          {claps.map((clap) => {
+            return (<Tr>
+              <Td isNumeric>{clap.ClapCount}</Td>
+              <Td>{clap.FromUserId}</Td>
+              <Td>{clap.Message}</Td>
+              <Td>{clap.Date}</Td>
+            </Tr>
+            )
+          })}
         </Tbody>
       </Table>
     </TableContainer>
