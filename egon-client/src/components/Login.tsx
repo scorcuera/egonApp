@@ -19,7 +19,6 @@ const Login = () => {
     }
   }
 
-
   return (
     <div className="form__container">
       <div className="form__image">

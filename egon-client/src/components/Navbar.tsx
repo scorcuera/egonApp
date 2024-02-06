@@ -6,11 +6,7 @@ import { AuthContext } from "../contexts/auth.context";
 
 const Navbar = () => {
 
-  const { user, logOutUser, isLoading } = useContext(AuthContext);
-
-  if (isLoading) {
-    return <nav className="navbar__container">Loading...</nav>;
-  }
+  const { user, logOutUser} = useContext(AuthContext);
 
   return (
     <nav className="navbar__container">

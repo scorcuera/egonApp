@@ -7,30 +7,25 @@ interface AuthContextProps {
     user: User | null;
     logInUser: (data: AuthUser) => Promise<User|undefined>;
     logOutUser: () => void;
-    isLoading: boolean
 }
 
 export const AuthContext = createContext<AuthContextProps>({
     user: {} as User,
     logInUser: async () => undefined,
-    logOutUser: () => {},
-    isLoading: true
+    logOutUser: () => {}
   });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUser] = useState<User | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
 
     const checkUser = async () => {
         const storedToken = localStorage.getItem("authToken");
         if (storedToken == undefined) {
             setUser(null);
-            setIsLoading(false)
             return;   
         }
         const userData : User = await authService.checkUser(storedToken);
         setUser(userData);
-        setIsLoading(false);
         return userData;
     }
 
@@ -51,7 +46,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }, [])
 
     return (
-        <AuthContext.Provider value={{ user, isLoading, logInUser, logOutUser }}>
+        <AuthContext.Provider value={{ user, logInUser, logOutUser }}>
             {children}
         </ AuthContext.Provider>
     )
