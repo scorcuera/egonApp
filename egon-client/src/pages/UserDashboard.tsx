@@ -25,8 +25,12 @@ const UserDashboard = () => {
             <p className="dashboard__info__claps">Available claps: {user.clapsAvailable}</p>
           </div>
           <div className="dashboard__container__buttons">
-            <button className="dashboard__button" onClick={() => setModal(user.userId)}>See my claps</button>
-          <button className="dashboard__button dashboard__button--primary">Send claps</button>
+            <Button colorScheme='messenger' variant='outline' onClick={() => setModal(user.userId)}>
+              See my claps
+            </Button>
+            <Button colorScheme='messenger' variant='solid'>
+              Send claps
+            </Button>
           </div>
           {clapsModal && <ClapsBoard claps={claps} />}
         </section>

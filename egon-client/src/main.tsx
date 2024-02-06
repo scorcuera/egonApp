@@ -4,9 +4,10 @@ import { RouterProvider } from "react-router-dom";
 import router from './router/router.tsx';
 import './index.css'
 import { AuthProvider } from './contexts/auth.context.tsx';
+import { theme } from './utils/GlobalStyle.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <ChakraProvider>
+  <ChakraProvider theme={theme}>
     <AuthProvider>
       <RouterProvider router={router} />
     </AuthProvider>
