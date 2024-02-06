@@ -2,6 +2,7 @@ import { useContext, useState } from "react"
 import { AuthContext } from "../contexts/auth.context"
 import clapService from "../services/claps.service";
 import ClapsBoard from "../components/ClapsBoard";
+import { Button, ButtonGroup } from '@chakra-ui/react'
 import "./UserDashboard.css";
 
 const UserDashboard = () => {
