@@ -6,8 +6,8 @@ import {
   Th,
   Td,
   TableContainer,
-} from '@chakra-ui/react'
-import { LazyMotion, domAnimation, m } from "framer-motion"
+} from '@chakra-ui/react';
+import { LazyMotion, domAnimation, m } from "framer-motion";
 
 const ClapsBoard = ({ claps }) => {
   return (
