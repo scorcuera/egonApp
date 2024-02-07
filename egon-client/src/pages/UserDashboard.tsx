@@ -5,6 +5,7 @@ import ClapsBoard from "../components/ClapsBoard";
 import { Button, Stack } from '@chakra-ui/react'
 import "./UserDashboard.css";
 import { Link, Outlet } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const UserDashboard = () => {
   const { user } = useContext(AuthContext);
@@ -23,8 +24,20 @@ const UserDashboard = () => {
       {user && (
         <section className="dashboard__container">
           <div className="dashboard__info">
-            <p className="dashboard__info__greeting">Hello {user.userName} 👋</p>
-            <p className="dashboard__info__claps">Available claps: {user.clapsAvailable}</p>
+            <motion.p
+              initial={{ x: 150, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="dashboard__info__greeting">
+                Hello {user.userName} 👋
+            </motion.p>
+            <motion.p 
+              className="dashboard__info__claps"
+              initial={{ x: 100, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.3 }}>
+                Available claps: {user.clapsAvailable}
+            </motion.p>
           </div>
           <div className="dashboard__container__buttons">
             {isFormOpen ? (
