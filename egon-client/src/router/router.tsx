@@ -3,6 +3,7 @@ import App from './App';
 import Login from '../components/Login';
 import UserDashboard from '../pages/UserDashboard';
 import HomePage from '../pages/HomePage';
+import ClapForm from '../components/ClapForm';
 
 const router = createBrowserRouter([
     {
@@ -15,7 +16,13 @@ const router = createBrowserRouter([
             },
             {
                 path: "/userDashboard",
-                element: <UserDashboard />
+                element: <UserDashboard />,
+                children: [
+                    {
+                        path: "sendClaps",
+                        element: <ClapForm />
+                    }
+                ]
             }
         ],
     },
