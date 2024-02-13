@@ -30,7 +30,7 @@ const Login = () => {
       </div>
       <form className="form__element" action="" onSubmit={handleSubmit(handleLogIn)}>
         <div className="form__message">
-          <p>Welcome !</p>
+          <p>Welcome back !</p>
           <p>Enter your details to sign in</p>
         </div>
           <Stack spacing={6}>
