@@ -4,6 +4,7 @@ import Login from '../components/Login';
 import UserDashboard from '../pages/UserDashboard';
 import HomePage from '../pages/HomePage';
 import ClapForm from '../components/ClapForm';
+import Register from '../components/Register';
 
 const router = createBrowserRouter([
     {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
     {
         path: "/login",
         element: <Login />
+    },
+    {
+        path: "/register",
+        element: <Register />
     },
 ])
 
