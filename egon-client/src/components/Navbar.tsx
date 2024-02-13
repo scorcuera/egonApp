@@ -29,7 +29,7 @@ const Navbar = () => {
                 <Link to="login" className="navbar__link">
                   Sign In
                 </Link>
-                <Link to="login" className="navbar__link navbar__link--primary">
+                <Link to="register" className="navbar__link navbar__link--primary">
                   Start
                 </Link>
               </Stack>
