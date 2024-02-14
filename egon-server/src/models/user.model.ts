@@ -27,7 +27,7 @@ export const UserModel = connection.define('User',
         },
         ClapsAvailable: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: true
         },
         CreatedAt: {
             type: DataTypes.DATE,
