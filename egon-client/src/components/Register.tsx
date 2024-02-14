@@ -2,6 +2,7 @@ import { AuthUser } from "../interfaces/user.interface.ts";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import authService from "../services/auth.service.ts";
 import { Input, InputGroup, RadioGroup, Radio, InputRightElement, Flex, Button, Stack, Text } from '@chakra-ui/react';
 import "./Login.css";
 
@@ -12,7 +13,8 @@ const Register = () => {
     const handleClick = () => setShow(!show);
 
     const handleSignUp = async (data: AuthUser): Promise<void> => {
-        //sdd
+        const result = await authService.registerUser(data);
+        console.log(result)
     }
 
     return (
@@ -32,7 +34,7 @@ const Register = () => {
                             <Input
                                 type='tel'
                                 placeholder='Enter your user name'
-                                {...register("UserName")}
+                                {...register("Username")}
                                 autoComplete="off"
                             />
                         </InputGroup>
