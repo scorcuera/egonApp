@@ -5,3 +5,14 @@ export interface User extends Auth {
     UserRole: number,
     ClapsAvailable: number
 }
+
+interface UserInfo {
+    UserId: number, 
+    Username: string, 
+    UserRole: string, 
+    UserEmail: string
+}
+
+export interface UserInfoList {
+    [index: number]: UserInfo
+}
