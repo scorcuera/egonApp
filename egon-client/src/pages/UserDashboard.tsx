@@ -29,14 +29,14 @@ const UserDashboard = () => {
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.5 }}
               className="dashboard__info__greeting">
-                Hello {user.userName} 👋
+              Hello {user.userName} 👋
             </motion.p>
-            <motion.p 
+            <motion.p
               className="dashboard__info__claps"
               initial={{ x: 100, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.3 }}>
-                Available claps: {user.clapsAvailable}
+              Available claps: {user.clapsAvailable}
             </motion.p>
           </div>
           <div className="dashboard__container__buttons">
@@ -52,7 +52,10 @@ const UserDashboard = () => {
                 <Button colorScheme='messenger' variant='outline' onClick={() => setModal(user.userId)}>
                   See my claps
                 </Button>
-                <Link to="/userDashboard/sendClaps" onClick={() => setIsFormOpen(!isFormOpen)}>
+                <Link
+                  to="/userDashboard/sendClaps"
+                  state={{ userId: user.userId }}
+                  onClick={() => setIsFormOpen(!isFormOpen)}>
                   <Button colorScheme='messenger' variant='solid'>
                     Send claps
                   </Button>
