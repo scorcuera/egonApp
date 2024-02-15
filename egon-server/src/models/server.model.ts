@@ -3,6 +3,7 @@ import cors from 'cors';
 import IndexRoutes from "../routes/index.routes";
 import ClapRoutes from "../routes/claps.routes";
 import AuthRoutes from "../routes/auth.routes";
+import UserRoutes from "../routes/user.routes";
 import { connection } from "../database/database";
 
 export class ServerModel {
@@ -25,8 +26,9 @@ export class ServerModel {
 
     routes() {
         this.app.use(IndexRoutes);
-        this.app.use("/claps", ClapRoutes)
+        this.app.use("/claps", ClapRoutes);
         this.app.use("/auth", AuthRoutes);
+        this.app.use("/users", UserRoutes)
     }
 
     listen() {
