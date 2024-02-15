@@ -5,6 +5,7 @@ import UserDashboard from '../pages/UserDashboard';
 import HomePage from '../pages/HomePage';
 import ClapForm from '../components/ClapForm';
 import Register from '../components/Register';
+import userService from '../services/user.service';
 
 const router = createBrowserRouter([
     {
@@ -21,7 +22,8 @@ const router = createBrowserRouter([
                 children: [
                     {
                         path: "sendClaps",
-                        element: <ClapForm />
+                        element: <ClapForm />,
+                        loader: userService.getAllUsers
                     }
                 ]
             }
