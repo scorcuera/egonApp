@@ -6,11 +6,21 @@ export interface User extends Auth {
     ClapsAvailable: number
 }
 
-interface UserInfo {
-    UserId: number, 
-    Username: string, 
-    UserRole: string, 
-    UserEmail: string
+export interface UserInfo {
+    id: number, 
+    name: string, 
+    email: string,
+    password: string,
+    role_id: string, 
+    claps_available: number,
+    created_at: string,
+}
+
+export interface NewUser {
+    name: string,
+    email: string,
+    password: string,
+    role_id: number,
 }
 
 export interface UserInfoList {
