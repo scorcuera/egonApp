@@ -1,6 +1,7 @@
 import { Auth } from "../interfaces/auth.interface";
-import prisma from "../connection/client";
+import User from "../models/user.model";
 import { generateToken, verifyToken } from "../utils/jwt.handler";
+import { NewUser } from "../interfaces/user.interface";
 import { encrypt, verify } from "../utils/password.handler";
 
 type JwtPayload= {
@@ -9,56 +10,33 @@ type JwtPayload= {
     exp: number;
 }
 
-type NewUser = {
-    name: string,
-    email: string,
-    password: string,
-    role_id: number,
-    claps_available: number
-}
-
 async function registerNewUser(authUser: NewUser) {
     console.log(authUser);
-    const isRegistered = await prisma.users.findUnique({
-        where: {
-            email: authUser.email
-        }
-    });
+    const isRegistered = await User.getUserByEmail(authUser.email);
     if (isRegistered) {
         return "This user already exists";
     }
     const passwordHash = await encrypt(authUser.password);
-    await prisma.users.create({
-        data: {
-            name: authUser.name,
-            email: authUser.email,
-            password: passwordHash,
-            role_id: authUser.role_id,
-        }
-    })
+    await User.createUser({...authUser, password: passwordHash});
     return "New user registered succesfully !"
 }
 
 async function logInUser(user: Auth) {
-    const isRegistered = await prisma.users.findUnique({
-        where: {
-            email: user.email
-        }
-    });
+    const userInfo = await User.getUserByEmail(user.email);
 
-    if (!isRegistered) {
+    if (!userInfo) {
         return "Not found user";
     }
-    const passwordHash = isRegistered.password;
+    const passwordHash = userInfo.password;
     const isCorrectPassword = await verify(user.password, passwordHash);
 
     if (!isCorrectPassword) {
         return "Invalid Password";
     }
 
-    const token = await generateToken(isRegistered.id);
-    const userEmail = isRegistered.email;
-    const userId = isRegistered.id;
+    const token = await generateToken(userInfo.id);
+    const userEmail = userInfo.email;
+    const userId = userInfo.id;
 
     const data = {
         token,
@@ -76,16 +54,13 @@ async function checkUserFromJwt (jwt: string) {
         throw Error("Not valid JWT");
     }
     const payloadId = jwtPayload.id;
-    const loggedInUser = await prisma.users.findUnique({
-        where: {
-            id: payloadId
-        }
-    });
+    const userInfo = await User.getUserById(payloadId);
 
-    const userId = loggedInUser?.id;
-    const userName = loggedInUser?.name;
-    const userRole = loggedInUser?.role_id;
-    const clapsAvailable = loggedInUser?.claps_available;
+    const userId = userInfo?.id;
+    const userName = userInfo?.name;
+    const userRole = userInfo?.role_id;
+    const clapsAvailable = userInfo?.claps_available;
+
     const userData = {userId, userName, userRole, clapsAvailable}
     
     return userData;
