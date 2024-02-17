@@ -1,40 +1,74 @@
-import { DataTypes } from "sequelize";
-import { connection } from "../database/database";
+import prisma from "../connection/client";
+import { NewUser } from "../interfaces/user.interface";
 
-export const UserModel = connection.define('User',
-    {
-        UserId: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
-            allowNull: true,
-            primaryKey: true
-        },
-        Username: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        Password: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        UserRole: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        UserEmail: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        ClapsAvailable: {
-            type: DataTypes.INTEGER,
-            allowNull: true
-        },
-        CreatedAt: {
-            type: DataTypes.DATE,
-            allowNull: true
+const User = {
+    getAllUsers: async () => {
+        try {
+            const users = await prisma.users.findMany();
+            return users;
+        } catch (e) {
+            console.log(e);
         }
-    }, 
-    {
-        timestamps: false,
+    },
+    getUserByEmail: async (email: string) => {
+        try {
+            const user = await prisma.users.findUnique({
+                where: {
+                    email: email
+                }
+            });
+            return user;
+        } catch (e) {
+            console.log(e);
+        }
+    },
+    getUserById: async (userId: number) => {
+        try {
+            const user = await prisma.users.findUnique({
+                where: {
+                    id: userId
+                }
+            });
+            return user;
+        } catch (e) {
+            console.log(e);
+        }
+    },
+    createUser: async (newUser: NewUser) => {
+        try {
+            await prisma.users.create({
+                data: newUser
+            });
+            return "User created succesfully !";
+        } catch (e) {
+            console.log(e);
+        }
+    },
+    updateUser: async (userId: number, updatedUser: any) => {
+        try {
+            await prisma.users.update({
+                where: {
+                    id: userId
+                },
+                data: updatedUser
+            });
+            return "User updated succesfully !";
+        } catch (e) {
+            console.log(e);
+        }
+    },
+    deleteUser: async (userId: number) => {
+        try {
+            await prisma.users.delete({
+                where: {
+                    id: userId
+                }
+            });
+            return "User deleted succesfully !";
+        } catch (e) {
+            console.log(e);
+        }
     }
-);
+}
+
+export default User;
