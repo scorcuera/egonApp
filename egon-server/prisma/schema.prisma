@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model claps {
+  id                              Int       @id @default(autoincrement())
+  from_user_id                    Int
+  to_user_id                      Int
+  num_claps                       Int
+  message                         String?   @db.Text
+  sent_at                         DateTime? @default(now()) @db.Timestamp(0)
+  users_claps_from_user_idTousers users     @relation("claps_from_user_idTousers", fields: [from_user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "claps_ibfk_1")
+  users_claps_to_user_idTousers   users     @relation("claps_to_user_idTousers", fields: [to_user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "claps_ibfk_2")
+
+  @@index([from_user_id], map: "from_user_id")
+  @@index([to_user_id], map: "to_user_id")
+}
+
+model roles {
+  id    Int     @id @default(autoincrement())
+  role  String? @db.VarChar(20)
+  users users[]
+}
+
+model users {
+  id                              Int       @id @default(autoincrement())
+  name                            String    @db.VarChar(30)
+  email                           String    @unique(map: "email") @db.VarChar(50)
+  password                        String    @db.VarChar(32)
+  role_id                         Int
+  claps_available                 Int?      @default(100)
+  created_at                      DateTime? @default(now()) @db.Timestamp(0)
+  claps_claps_from_user_idTousers claps[]   @relation("claps_from_user_idTousers")
+  claps_claps_to_user_idTousers   claps[]   @relation("claps_to_user_idTousers")
+  roles                           roles     @relation(fields: [role_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "users_ibfk_1")
+
+  @@index([role_id], map: "role_id")
+}
