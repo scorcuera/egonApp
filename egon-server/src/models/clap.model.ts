@@ -1,44 +1,49 @@
-import { DataTypes } from "sequelize";
-import { connection } from "../database/database";
+import prisma from "../connection/client";
+import { ClapForm } from "../interfaces/clap.interface";
 
-export const ClapModel = connection.define('Clap',
-    {
-        ClapId: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
-            allowNull: true,
-            primaryKey: true
-        },
-        FromUserId: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'users',
-                key: 'UserId',
-            }
-        },
-        ToUserId: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'users',
-                key: 'UserId',
-            }
-        },
-        ClapCount: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
-        Message: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        SentAt: {
-            type: DataTypes.DATE,
-            allowNull: true
-        },
+const Clap = {
+    getAllClaps: async () => {
+        try {
+            const claps = await prisma.claps.findMany();
+            return claps;
+        } catch (e) {
+            console.log(e);
+        }
     },
-    {
-        timestamps: false
+    getAllSentClaps: async (senderId: number) => {
+        try {
+            const claps = await prisma.claps.findMany({
+                where: {
+                    from_user_id: senderId
+                }
+            });
+            return claps;
+        } catch (e) {
+            console.log(e);
+        }
+    },
+    getAllReceivedClaps: async (recipientId: number) => {
+        try {
+            const claps = await prisma.claps.findMany({
+                where: {
+                    to_user_id: recipientId
+                }
+            });
+            return claps;
+        } catch (e) {
+            console.log(e);
+        }
+    },
+    sendClaps: async (newClaps: ClapForm) => {
+        try {
+            await prisma.claps.create({
+                data: newClaps
+            })
+            return 'Claps sent succesfully !';
+        } catch (e) {
+            console.log(e);
+        }
     }
-);
+}
+
+export default Clap;
