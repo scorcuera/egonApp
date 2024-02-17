@@ -4,7 +4,7 @@ import IndexRoutes from "../routes/index.routes";
 import ClapRoutes from "../routes/claps.routes";
 import AuthRoutes from "../routes/auth.routes";
 import UserRoutes from "../routes/user.routes";
-import { connection } from "../database/database";
+
 
 export class ServerModel {
     private app: Application;
@@ -38,7 +38,6 @@ export class ServerModel {
     }
 
     async dbConnect() {
-        await connection.authenticate();
         console.log('base de datos conectada !')
     }
 }
