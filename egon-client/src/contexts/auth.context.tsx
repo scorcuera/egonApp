@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             setUser(null);
             return;   
         }
-        const userData : User = await authService.checkUser(storedToken);
+        const userData = await authService.checkUser(storedToken);
         setUser(userData);
         return userData;
     }
