@@ -56,12 +56,12 @@ async function checkUserFromJwt (jwt: string) {
     const payloadId = jwtPayload.id;
     const userInfo = await User.getUserById(payloadId);
 
-    const userId = userInfo?.id;
-    const userName = userInfo?.name;
-    const userRole = userInfo?.role_id;
-    const clapsAvailable = userInfo?.claps_available;
-
-    const userData = {userId, userName, userRole, clapsAvailable}
+    const userData = {
+        id: userInfo?.id,
+        name: userInfo?.name,
+        role_id: userInfo?.role_id,
+        claps_available: userInfo?.claps_available
+    }
     
     return userData;
 }
