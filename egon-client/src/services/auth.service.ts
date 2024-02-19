@@ -28,7 +28,7 @@ const authService = {
         {
             headers: { Authorization: `Bearer: ${token}`}
         })
-        const userData = response.json();
+        const userData = await response.json();
         return userData;
     }
 }
