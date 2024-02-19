@@ -11,10 +11,10 @@ const ClapForm = () => {
 
   const handleClapForm = async (data: any) => {
     const clapDataForm = {
-      FromUserId: senderId,
-      ToUserId: Number(data.ToUserId),
-      ClapCount: Number(data.ClapCount),
-      Message: data.Message
+      from_user_id: senderId,
+      to_user_id: Number(data.to_user_id),
+      num_claps: Number(data.num_claps),
+      message: data.message
     }
     await clapService.sendClaps(clapDataForm);
   };
@@ -26,11 +26,11 @@ const ClapForm = () => {
           <Flex w='md' flexDirection='column'>
             <Text mb='8px'>Who do you want to greet ?</Text>
             <InputGroup w='md' flexDirection="column">
-              <Select {...register("ToUserId")}>
+              <Select {...register("to_user_id")}>
                 <option value="" disabled selected hidden>Choose a colleague</option>
                 {users.map((user) => {
-                  return <option value={user.UserId}>
-                    {user.Username}
+                  return <option value={user.id}>
+                    {user.name}
                   </option>
                 })}
               </Select>
@@ -42,7 +42,7 @@ const ClapForm = () => {
               <Input
                 type='tel'
                 placeholder='Number of claps'
-                {...register("ClapCount")}
+                {...register("num_claps")}
                 autoComplete="off"
               />
             </InputGroup>
@@ -53,7 +53,7 @@ const ClapForm = () => {
               <Input
                 type='tel'
                 placeholder='What do you want to remark ?'
-                {...register("Message")}
+                {...register("message")}
                 autoComplete="off"
               />
             </InputGroup>
