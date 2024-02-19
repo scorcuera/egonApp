@@ -26,10 +26,10 @@ const ClapsBoard = ({ claps }) => {
               {claps.map((clap) => {
                 return (
                   <Tr>
-                    <Td isNumeric>{clap.ClapCount}</Td>
-                    <Td>{clap.FromUserId}</Td>
-                    <Td>{clap.Message}</Td>
-                    <Td>{clap.Date}</Td>
+                    <Td isNumeric>{clap.num_claps}</Td>
+                    <Td>{clap.from_user_id}</Td>
+                    <Td>{clap.message}</Td>
+                    <Td>{clap.sent_at}</Td>
                   </Tr>
                 )
               })}
