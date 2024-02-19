@@ -38,14 +38,14 @@ const Login = () => {
               <InputLeftElement pointerEvents='none'>
                 <EmailIcon color='gray.300' />
               </InputLeftElement>
-              <Input type='tel' placeholder='Enter your email' {...register("UserEmail")} autoComplete="off" />
+              <Input type='tel' placeholder='Enter your email' {...register("email")} autoComplete="off" />
             </InputGroup>
             <InputGroup>
               <Input
                 pr='4.5rem'
                 type={show ? 'text' : 'password'}
                 placeholder='Enter password'
-                {...register("Password")}
+                {...register("password")}
                 autoComplete="off"
               />
               <InputRightElement width='4.5rem'>
