@@ -1,15 +1,13 @@
 export interface AuthUser {
-    "Username": string,
-    "UserEmail": string,
-    "Password": string,
-    "UserRole": string,
+    "email": string,
+    "password": string,
 }
 
 export interface User {
-    clapsAvailable: string,
-    userId: string,
-    userName: string,
-    userRole: string
+    id: number,
+    name: string,
+    role_id: string,
+    claps_available: number,
 }
 
 export default User;
