@@ -55,7 +55,7 @@ const Register = () => {
                         <RadioGroup defaultValue='1'>
                             <Stack spacing={4} direction='row'>
                                 <Radio
-                                    value='1'
+                                    value="1"
                                     {...register("UserRole")}>
                                     Trainer
                                 </Radio>
