@@ -1,5 +1,5 @@
 const clapService = {
-    async getAllReceivedClaps(id: string) {
+    async getAllReceivedClaps(id: number) {
         const response = await fetch(`http://localhost:3000/claps/receivedClaps/${id}`);
         const claps = await response.json();
         return claps;
