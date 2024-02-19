@@ -13,7 +13,7 @@ const UserDashboard = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [claps, setClaps] = useState([]);
 
-  const setModal = async (id: string) => {
+  const setModal = async (id: number) => {
     const claps = await clapService.getAllReceivedClaps(id);
     setClaps(claps);
     setClapsModal(!clapsModal);
@@ -29,14 +29,14 @@ const UserDashboard = () => {
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.5 }}
               className="dashboard__info__greeting">
-              Hello {user.userName} 👋
+              Hello {user.name} 👋
             </motion.p>
             <motion.p
               className="dashboard__info__claps"
               initial={{ x: 100, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.3 }}>
-              Available claps: {user.clapsAvailable}
+              Available claps: {user.claps_available}
             </motion.p>
           </div>
           <div className="dashboard__container__buttons">
@@ -49,12 +49,12 @@ const UserDashboard = () => {
               </Stack>
             ) : (
               <>
-                <Button colorScheme='messenger' variant='outline' onClick={() => setModal(user.userId)}>
+                <Button colorScheme='messenger' variant='outline' onClick={() => setModal(user.id)}>
                   See my claps
                 </Button>
                 <Link
                   to="/userDashboard/sendClaps"
-                  state={{ userId: user.userId }}
+                  state={{ userId: user.id }}
                   onClick={() => setIsFormOpen(!isFormOpen)}>
                   <Button colorScheme='messenger' variant='solid'>
                     Send claps
