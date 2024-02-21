@@ -1,10 +1,12 @@
+import { ClapForm } from "../interfaces/clap.interface";
+
 const clapService = {
     async getAllReceivedClaps(id: number) {
         const response = await fetch(`http://localhost:3000/claps/receivedClaps/${id}`);
         const claps = await response.json();
         return claps;
     },
-    async sendClaps(claps) {
+    async sendClaps(claps : ClapForm) {
         const response = await fetch('http://localhost:3000/claps/', {
             method: 'POST',
             body: JSON.stringify(claps),
