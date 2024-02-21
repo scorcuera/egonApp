@@ -2,15 +2,17 @@ import { Flex, Text, InputGroup, Input, Select, Stack, Button } from "@chakra-ui
 import { useForm } from "react-hook-form"
 import { useLoaderData, useLocation } from "react-router-dom";
 import clapService from "../services/claps.service";
+import { User } from '../interfaces/user.interface';
+import { ClapForm } from "../interfaces/clap.interface";
 
 const ClapForm = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm<ClapForm>();
   const location = useLocation();
-  const users = useLoaderData();
+  const users : User[] = useLoaderData() as User[];
   const senderId = location.state.userId;
 
-  const handleClapForm = async (data: any) => {
-    const clapDataForm = {
+  const handleClapForm = async (data: ClapForm) => {
+    const clapDataForm : ClapForm = {
       from_user_id: senderId,
       to_user_id: Number(data.to_user_id),
       num_claps: Number(data.num_claps),
