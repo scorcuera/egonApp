@@ -3,6 +3,13 @@ export interface AuthUser {
     password: string,
 }
 
+export interface RegisterUser {
+    name: string,
+    email: string,
+    password: string,
+    role_id: string,
+}
+
 export interface User {
     id: number,
     name: string,
