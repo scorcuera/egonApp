@@ -1,8 +1,6 @@
-interface ClapForm {
-    "FromUserId": number,
-    "ToUserId": number,
-    "ClapCount": number,
-    "Message": string,
+export interface ClapForm {
+    from_user_id: number,
+    to_user_id: number,
+    num_claps: number,
+    message: string,
 }
-
-export default ClapForm;
