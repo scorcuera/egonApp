@@ -10,6 +10,7 @@ import {
 import { LazyMotion, domAnimation, m } from "framer-motion";
 
 const ClapsBoard = ({ claps }) => {
+  
   return (
     <LazyMotion features={domAnimation}>
         <TableContainer initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} as={m.div}>
@@ -27,7 +28,7 @@ const ClapsBoard = ({ claps }) => {
                 return (
                   <Tr>
                     <Td isNumeric>{clap.num_claps}</Td>
-                    <Td>{clap.from_user_id}</Td>
+                    <Td>{clap.users_claps_from_user_idTousers.name}</Td>
                     <Td>{clap.message}</Td>
                     <Td>{new Date(clap.sent_at).toLocaleDateString()}</Td>
                   </Tr>
