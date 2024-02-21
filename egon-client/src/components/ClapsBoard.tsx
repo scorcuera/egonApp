@@ -29,7 +29,7 @@ const ClapsBoard = ({ claps }) => {
                     <Td isNumeric>{clap.num_claps}</Td>
                     <Td>{clap.from_user_id}</Td>
                     <Td>{clap.message}</Td>
-                    <Td>{clap.sent_at}</Td>
+                    <Td>{new Date(clap.sent_at).toLocaleDateString()}</Td>
                   </Tr>
                 )
               })}
