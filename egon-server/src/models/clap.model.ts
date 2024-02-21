@@ -26,7 +26,17 @@ const Clap = {
         try {
             const claps = await prisma.claps.findMany({
                 where: {
-                    to_user_id: recipientId
+                    to_user_id: recipientId,
+                },
+                select: {
+                    num_claps: true,
+                    message: true,
+                    sent_at: true,
+                    users_claps_from_user_idTousers: {
+                        select: {
+                            name: true,
+                        },
+                    },
                 }
             });
             return claps;
