@@ -8,7 +8,7 @@ import { EmailIcon } from "@chakra-ui/icons";
 import "./Login.css";
 
 const Login = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm<AuthUser>();
   const { logInUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
