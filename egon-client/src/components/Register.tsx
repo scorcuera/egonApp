@@ -1,18 +1,16 @@
-import { AuthUser } from "../interfaces/user.interface.ts";
+import { RegisterUser } from "../interfaces/user.interface.ts";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import authService from "../services/auth.service.ts";
 import { Input, InputGroup, RadioGroup, Radio, InputRightElement, Flex, Button, Stack, Text } from '@chakra-ui/react';
 import "./Login.css";
 
 const Register = () => {
-    const { register, handleSubmit } = useForm();
-    const navigate = useNavigate();
+    const { register, handleSubmit } = useForm<RegisterUser>();
     const [show, setShow] = useState(false);
     const handleClick = () => setShow(!show);
 
-    const handleSignUp = async (data: AuthUser): Promise<void> => {
+    const handleSignUp = async (data: RegisterUser): Promise<void> => {
         const result = await authService.registerUser(data);
         console.log(result)
     }
@@ -34,7 +32,7 @@ const Register = () => {
                             <Input
                                 type='tel'
                                 placeholder='Enter your user name'
-                                {...register("Username")}
+                                {...register("name")}
                                 autoComplete="off"
                             />
                         </InputGroup>
@@ -45,7 +43,7 @@ const Register = () => {
                             <Input
                                 type='tel'
                                 placeholder='Enter your email'
-                                {...register("UserEmail")}
+                                {...register("email")}
                                 autoComplete="off"
                             />
                         </InputGroup>
@@ -56,12 +54,12 @@ const Register = () => {
                             <Stack spacing={4} direction='row'>
                                 <Radio
                                     value="1"
-                                    {...register("UserRole")}>
+                                    {...register("role_id")}>
                                     Trainer
                                 </Radio>
                                 <Radio
                                     value='2'
-                                    {...register("UserRole")}>
+                                    {...register("role_id")}>
                                     Manager
                                 </Radio>
                             </Stack>
@@ -74,7 +72,7 @@ const Register = () => {
                                 pr='4.5rem'
                                 type={show ? 'text' : 'password'}
                                 placeholder='Enter password'
-                                {...register("Password")}
+                                {...register("password")}
                                 autoComplete="off"
                             />
                             <InputRightElement width='4.5rem'>
