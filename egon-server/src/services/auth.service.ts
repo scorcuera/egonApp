@@ -11,7 +11,6 @@ type JwtPayload= {
 }
 
 async function registerNewUser(authUser: NewUser) {
-    console.log(authUser);
     const isRegistered = await User.getUserByEmail(authUser.email);
     if (isRegistered) {
         return "This user already exists";
