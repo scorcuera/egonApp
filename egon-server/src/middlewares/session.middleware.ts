@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { verifyToken } from "../utils/jwt.handler";
-import { UserModel } from "../models/user.model";
+import User from "../models/user.model";
 
 type JwtPayload= {
     id: number;
@@ -18,14 +18,10 @@ export async function isAdmin(req: Request, res: Response , next: NextFunction) 
             res.send("Not valid JWT");
         }
         const payloadId = jwtPayload.id;
-        const loggedInUser = await UserModel.findOne({
-            where: {
-                UserID: payloadId
-            }
-        })
-        const loggedInUserRole = loggedInUser?.get('UserRole');
+        const loggedInUser = await User.getUserById(payloadId)
+        const loggedInUserRole = loggedInUser?.role_id;
         
-        if (loggedInUserRole !== "manager") {
+        if (loggedInUserRole !== 2) {
             res.status(401);
             res.send("Not valid permissions");
         }
