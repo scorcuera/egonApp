@@ -4,7 +4,6 @@ import IndexRoutes from "../routes/index.routes";
 import ClapRoutes from "../routes/claps.routes";
 import AuthRoutes from "../routes/auth.routes";
 import UserRoutes from "../routes/user.routes";
-import { db_connection } from "../connection/sequelize";
 
 
 export class ServerModel {
@@ -36,13 +35,5 @@ export class ServerModel {
         this.app.listen(this.app.get("port"), () => {
             console.log(`Server listening on port ${this.app.get("port")}`);
         })
-    }
-
-    async dbConnect() {
-        try {
-            await db_connection();
-        } catch (error) {
-            console.error('Unable to connect to the database:', error);
-        }
     }
 }
