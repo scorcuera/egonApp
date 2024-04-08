@@ -5,7 +5,7 @@ export async function registerUser (req: Request, res: Response): Promise<Respon
     try {
         const newUser = req.body;
         const responseUser = await registerNewUser(newUser);
-        return res.json(responseUser)
+        return res.status(201).json(responseUser)
     } catch(e) {
         console.log(e)
     }
