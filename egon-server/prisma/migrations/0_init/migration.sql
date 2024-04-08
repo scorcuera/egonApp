@@ -25,7 +25,7 @@ CREATE TABLE `users` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(30) NOT NULL,
     `email` VARCHAR(50) NOT NULL,
-    `password` VARCHAR(32) NOT NULL,
+    `password` VARCHAR(100) NOT NULL,
     `role_id` INTEGER NOT NULL,
     `claps_available` INTEGER NULL DEFAULT 100,
     `created_at` TIMESTAMP(0) NULL DEFAULT CURRENT_TIMESTAMP(0),

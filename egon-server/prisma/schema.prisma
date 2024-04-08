@@ -31,7 +31,7 @@ model users {
   id                              Int       @id @default(autoincrement())
   name                            String    @db.VarChar(30)
   email                           String    @unique(map: "email") @db.VarChar(50)
-  password                        String    @db.VarChar(32)
+  password                        String    @db.VarChar(100)
   role_id                         Int
   claps_available                 Int?      @default(100)
   created_at                      DateTime? @default(now()) @db.Timestamp(0)
