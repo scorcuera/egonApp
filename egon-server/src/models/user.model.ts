@@ -1,4 +1,4 @@
-import prisma from "../connection/client";
+import { prisma } from "../connection/prismaClient";
 import { NewUser } from "../interfaces/user.interface";
 
 const User = {

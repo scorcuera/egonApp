@@ -4,24 +4,25 @@ import IndexRoutes from "../routes/index.routes";
 import ClapRoutes from "../routes/claps.routes";
 import AuthRoutes from "../routes/auth.routes";
 import UserRoutes from "../routes/user.routes";
+import { db_connection } from "../connection/sequelize";
 
 
 export class ServerModel {
-    private app: Application;
+    public app: Application;
     private port?: number | string;
 
-    constructor(port?: number | string) {
+    constructor (port?: number | string) {
         this.app = express();
         this.port = port;
+        this.dbConnect();
         this.settings();
         this.routes();
-        this.dbConnect();
     }
 
     settings() {
         this.app.set("port", this.port || process.env.PORT || 3000);
         this.app.use(express.json());
-        this.app.use(cors());
+        this.app.use(cors());      
     }
 
     routes() {
@@ -38,6 +39,10 @@ export class ServerModel {
     }
 
     async dbConnect() {
-        console.log('base de datos conectada !')
+        try {
+            await db_connection();
+        } catch (error) {
+            console.error('Unable to connect to the database:', error);
+        }
     }
 }
