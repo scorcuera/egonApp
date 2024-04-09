@@ -22,8 +22,8 @@ model claps {
 }
 
 model roles {
-  id    Int     @id @default(autoincrement())
-  role  String? @db.VarChar(20)
+  id    Int     @id
+  name  String? @db.VarChar(20)
   users users[]
 }
 
