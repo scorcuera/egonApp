@@ -13,7 +13,6 @@ export class ServerModel {
     constructor (port?: number | string) {
         this.app = express();
         this.port = port;
-        this.dbConnect();
         this.settings();
         this.routes();
     }
