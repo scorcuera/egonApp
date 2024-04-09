@@ -37,7 +37,12 @@ const User = {
     createUser: async (newUser: NewUser) => {
         try {
             await prisma.users.create({
-                data: newUser
+                data: {
+                    name: newUser.name,
+                    email: newUser.email,
+                    password: newUser.password,
+                    role_id: newUser.role_id ?? 1
+                }
             });
             return "User created succesfully !";
         } catch (e) {
