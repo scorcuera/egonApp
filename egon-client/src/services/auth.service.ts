@@ -1,4 +1,4 @@
-import { AuthUser } from "../interfaces/user.interface";
+import { AuthUser, RegisterUser } from "../interfaces/user.interface";
 
 const authService = {
     async loginUser(user: AuthUser) {
@@ -12,10 +12,10 @@ const authService = {
         const result = await loggedInUser.json();
         return result;
     },
-    async registerUser(user: AuthUser) {
+    async registerUser(user: RegisterUser) {
         const registeredUser = await fetch("http://localhost:3000/auth/register", {
             method: 'POST',
-            body: JSON.stringify(user),
+            body: JSON.stringify({...user, role_id: parseInt(user.role_id)}),
             headers: {
                 "Content-Type": "application/json",
             },
