@@ -30,7 +30,7 @@ const Navbar = () => {
                   Sign In
                 </Link>
                 <Link to="register" className="navbar__link navbar__link--primary">
-                  Start
+                  Register
                 </Link>
               </Stack>
             )}
