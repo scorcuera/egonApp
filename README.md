@@ -50,3 +50,38 @@ npm i
 Run the command `npm run dev` to start the client.
 
 The client should now be running and accessible at the specified port.
+
+### Server
+
+First, install the dependencies:
+
+```shell
+npm i
+```
+
+Then, update the environment variables. Create a `.env` file in the root directory of your project if it doesn't already exist. 
+
+```YAML
+# Node.js server port
+PORT=3000
+
+# Database connection string (replace placeholders with actual values)
+DATABASE_URL="mysql://[DB_USERNAME]:[DB_PASSWORD]@localhost:3306/[DB_DATABASE]"
+
+# JWT secret for authentication
+JWT_SECRET='yourSecret'
+```
+
+Replace `[DB_USERNAME]`, `[DB_PASSWORD]`, and `[DB_DATABASE]` with your MySQL database username, password, and database name respectively.
+
+Run Prisma migrations to update your database schema with the latest changes:
+
+```bash
+npx prisma migrate dev
+```
+
+Once the migrations are successfully applied, you can start your server by running:
+
+```bash
+npm run dev
+```
