@@ -7,13 +7,15 @@ EgonApp
 <img src="./public/register_view.png" alt="register_page" width="800" />
 <img src="./public/login_view.png" alt="login_page" width="800" />
 
+
 ## Introduction
 
 Welcome to Egon, an innovative application designed to foster a culture of recognition and motivation within teams. Egon is inspired by the principles of peer recognition platforms like Nailted and is tailored to enhance workplace morale by allowing team members to commend each other.
 
 By integrating Egon into your team's routine, you can help build a supportive environment that celebrates each member's contributions and fosters a strong sense of community. Get ready to clap and be clapped, and watch as motivation and workplace happiness soar!
 
-### Key Features of Egon:
+
+#### <ins>Key Features of Egon</ins>:
 
 🔹 <strong>Peer-to-Peer Recognition</strong>: Egon enables team members to give verbal awards to each other, encapsulating these commendations in the form of "claps". This allows colleagues to express appreciation for each other's efforts and achievements.
 
@@ -32,3 +34,19 @@ By integrating Egon into your team's routine, you can help build a supportive en
 - [ ] The email is received on Monday's morning.
 - [x] Create an account and log in to the application.
 
+
+## 🚀 Getting started
+
+### Client
+
+To run the client, follow these steps:
+
+Make sure you have all the necessary dependencies installed:
+
+```shell
+npm i
+```
+
+Run the command `npm run dev` to start the client.
+
+The client should now be running and accessible at the specified port.
