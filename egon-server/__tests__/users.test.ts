@@ -61,7 +61,7 @@ describe("GET users", () => {
         }
         const server = new ServerModel();
         await request(server.app).post("/auth/login").send(user).then(response => {
-            token = response.body.data.token;
+            token = response.body.token;
         });
         const response = await request(server.app).get("/users").set("Authorization", `Bearer ${token}`);
         expect(response.status).toBe(401);
