@@ -50,7 +50,7 @@ async function logInUser(user: Auth) {
 async function checkUserFromJwt (jwt: string) {
     const jwtPayload = await verifyToken(jwt) as JwtPayload;
     if (!jwtPayload) {
-        throw Error("Not valid JWT");
+        throw Error("Not valid token");
     }
     const payloadId = jwtPayload.id;
     const userInfo = await User.getUserById(payloadId);
