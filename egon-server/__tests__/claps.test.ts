@@ -61,6 +61,31 @@ describe("GET all claps", () => {
     });
 })
 
+describe("GET user claps", () => {
+    let token = "";
+    let userId = 0;
+    beforeAll(async() => {
+        const user = {
+            email: "user@f5.org",
+            password: "pass1"
+        }
+        const server = new ServerModel();
+        const userData = await request(server.app).post("/auth/login").send(user);
+        token = userData.body.token;
+        userId = userData.body.userId;
+    });
+    test("should return status code 200 when received claps are called", async () => {
+        const server = new ServerModel();
+        const response = await request(server.app).get(`/claps/receivedClaps/${userId}`).set("Authorization", `Bearer ${token}`);
+        expect(response.status).toBe(200);
+    });
+    test("should return status code 401 if token is not provided", async () => {
+        const server = new ServerModel();
+        const response = await request(server.app).get(`/claps/receivedClaps/${userId}`);
+        expect(response.status).toBe(401);
+    })
+})
+
 afterAll(async () => {
     const deleteUsers = prisma.users.deleteMany();
     const deleteRoles = prisma.roles.deleteMany();
