@@ -26,6 +26,21 @@ export async function isAdmin(req: Request, res: Response , next: NextFunction) 
         next()
         return jwtPayload;
     }catch (e) {
-        res.status(400);
+        res.status(500).json({message: "An error occurred in the server"});
+    }
+}
+
+export async function isUser(req: Request, res: Response , next: NextFunction) {
+    try {
+        const jwtByUser = req.headers.authorization || "";
+        const jwt = jwtByUser.split(" ").pop() || "";
+        const jwtPayload = await verifyToken(jwt) as JwtPayload;
+        if (!jwtPayload) {
+            return res.status(401).json({message: "Not valid token"});
+        }
+        next()
+        return jwtPayload;
+    }catch (e) {
+        res.status(500).json({message: "An error occurred in the server"});
     }
 }
