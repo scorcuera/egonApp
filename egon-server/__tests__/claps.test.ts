@@ -62,26 +62,84 @@ describe("GET all claps", () => {
 })
 
 describe("GET user claps", () => {
-    let token = "";
-    let userId = 0;
+    let user = {
+        id: 0,
+        token: ""
+    };
     beforeAll(async() => {
-        const user = {
+        const userData = {
             email: "user@f5.org",
             password: "pass1"
         }
         const server = new ServerModel();
-        const userData = await request(server.app).post("/auth/login").send(user);
-        token = userData.body.token;
-        userId = userData.body.userId;
+        const userInfo = await request(server.app).post("/auth/login").send(userData);
+        user = {
+            id: userInfo.body.userId,
+            token: userInfo.body.token
+        }
     });
     test("should return status code 200 when received claps are called", async () => {
         const server = new ServerModel();
-        const response = await request(server.app).get(`/claps/receivedClaps/${userId}`).set("Authorization", `Bearer ${token}`);
+        const response = await request(server.app).get(`/claps/receivedClaps/${user.id}`).set("Authorization", `Bearer ${user.token}`);
         expect(response.status).toBe(200);
     });
     test("should return status code 401 if token is not provided", async () => {
         const server = new ServerModel();
-        const response = await request(server.app).get(`/claps/receivedClaps/${userId}`);
+        const response = await request(server.app).get(`/claps/receivedClaps/${user.id}`);
+        expect(response.status).toBe(401);
+    })
+})
+
+describe("POST claps", () => {
+    let user = {
+        id: 0,
+        token: ""
+    };
+    let admin = {
+        id: 0,
+        token: ""
+    };
+    beforeAll(async() => {
+        const userData = {
+            email: "user@f5.org",
+            password: "pass1"
+        }
+        const adminData = {
+            email: "admin@f5.org",
+            password: "pass2"
+        }
+        const server = new ServerModel();
+        const userInfo = await request(server.app).post("/auth/login").send(userData);
+        const adminInfo = await request(server.app).post("/auth/login").send(adminData);
+        user = {
+            id: userInfo.body.userId,
+            token: userInfo.body.token
+        }
+        admin = {
+            id: adminInfo.body.userId,
+            token: adminInfo.body.token
+        }
+    });
+    test("should return status code 201 when claps are sent", async () => {
+        const clapForm = {
+            from_user_id: user.id,
+            to_user_id: admin.id,
+            num_claps: 20,
+            message: "great job!"
+        }
+        const server = new ServerModel();
+        const response = await request(server.app).post("/claps").send(clapForm).set("Authorization", `Bearer ${user.token}`);
+        expect(response.status).toBe(201);
+    });
+    test("should return 401 if token is not provided", async () => {
+        const clapForm = {
+            from_user_id: user.id,
+            to_user_id: admin.id,
+            num_claps: 20,
+            message: "great job!"
+        }
+        const server = new ServerModel();
+        const response = await request(server.app).post("/claps").send(clapForm);
         expect(response.status).toBe(401);
     })
 })
@@ -92,9 +150,9 @@ afterAll(async () => {
     const deleteClaps = prisma.claps.deleteMany();
 
     await prisma.$transaction([
+        deleteClaps,
         deleteUsers,
-        deleteRoles,
-        deleteClaps
+        deleteRoles
         ]
     );
 
