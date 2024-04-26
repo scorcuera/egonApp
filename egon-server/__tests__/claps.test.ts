@@ -55,7 +55,7 @@ describe("GET all claps", () => {
         }
         const server = new ServerModel();
         const userData = await request(server.app).post("/auth/login").send(user);
-        const token = userData.body.token;
+        token = userData.body.token;
         const response = await request(server.app).get("/claps").set("Authorization", `Bearer ${token}`);
         expect(response.status).toBe(401);
     });
