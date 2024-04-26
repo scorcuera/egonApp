@@ -9,7 +9,7 @@
     "dev": "ts-node-dev --respawn --transpile-only ./src/index.ts",
     "lint": "eslint . --ext .ts",
     "pretest": "dotenv -e .env.test -- npx prisma migrate dev --name init",
-    "test": "jest"
+    "test": "jest --runInBand --silent"
   },
   "keywords": [],
   "author": "",
