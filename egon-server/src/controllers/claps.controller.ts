@@ -24,6 +24,9 @@ export async function getAllReceivedClaps (req: Request, res: Response): Promise
     try {
         const recipientId = Number(req.params.id);
         const claps = await Clap.getAllReceivedClaps(recipientId);
+        if (Array.isArray(claps) && claps.length === 0) {
+            return res.status(200).json({message: "You don't have any received claps yet"});
+        }
         return res.status(200).json(claps);
     } catch(e) {
         res.status(500).json({message: "An error occurred while fetching claps"});
