@@ -41,7 +41,7 @@ describe("GET users", () => {
         }
         const server = new ServerModel();
         const response = await request(server.app).post("/auth/login").send(admin);
-        token = response.body.token;
+        token = response.body.data.token;
     });
     test("should return status code 200 when users are called", async () => {
         const server = new ServerModel();
@@ -61,7 +61,7 @@ describe("GET users", () => {
         }
         const server = new ServerModel();
         await request(server.app).post("/auth/login").send(user).then(response => {
-            token = response.body.token;
+            token = response.body.data.token;
         });
         const response = await request(server.app).get("/users").set("Authorization", `Bearer ${token}`);
         expect(response.status).toBe(401);
