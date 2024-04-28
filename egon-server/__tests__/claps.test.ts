@@ -41,7 +41,7 @@ describe("GET all claps", () => {
         }
         const server = new ServerModel();
         const response = await request(server.app).post("/auth/login").send(admin);
-        token = response.body.token;
+        token = response.body.data.token;
     });
     test("should return status code 200 when claps are called", async () => {
         const server = new ServerModel();
@@ -55,7 +55,7 @@ describe("GET all claps", () => {
         }
         const server = new ServerModel();
         const userData = await request(server.app).post("/auth/login").send(user);
-        token = userData.body.token;
+        token = userData.body.data.token;
         const response = await request(server.app).get("/claps").set("Authorization", `Bearer ${token}`);
         expect(response.status).toBe(401);
     });
@@ -83,12 +83,12 @@ describe("POST claps", () => {
         const userInfo = await request(server.app).post("/auth/login").send(userData);
         const adminInfo = await request(server.app).post("/auth/login").send(adminData);
         user = {
-            id: userInfo.body.userId,
-            token: userInfo.body.token
+            id: userInfo.body.data.user.id,
+            token: userInfo.body.data.token
         }
         admin = {
-            id: adminInfo.body.userId,
-            token: adminInfo.body.token
+            id: adminInfo.body.data.user.id,
+            token: adminInfo.body.data.token
         }
     });
     test("should return status code 201 when claps are sent", async () => {
@@ -137,12 +137,12 @@ describe("GET user claps", () => {
         const userInfo = await request(server.app).post("/auth/login").send(userData);
         const adminInfo = await request(server.app).post("/auth/login").send(adminData);
         user = {
-            id: userInfo.body.userId,
-            token: userInfo.body.token
+            id: userInfo.body.data.user.id,
+            token: userInfo.body.data.token
         }
         admin = {
-            id: adminInfo.body.userId,
-            token: adminInfo.body.token
+            id: adminInfo.body.data.user.id,
+            token: adminInfo.body.data.token
         }
     });
     test("should return status code 200 when received claps are called", async () => {
