@@ -1,6 +1,6 @@
-import { Auth } from "./auth.interface";
+import { AuthUser } from "./auth.interface";
 
-export interface User extends Auth {
+export interface User extends AuthUser {
     Username: string,
     UserRole: number,
     ClapsAvailable: number
