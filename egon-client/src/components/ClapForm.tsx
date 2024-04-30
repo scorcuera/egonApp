@@ -3,22 +3,23 @@ import { useForm } from "react-hook-form"
 import { useLoaderData, useLocation } from "react-router-dom";
 import clapService from "../services/claps.service";
 import { User } from '../interfaces/user.interface';
-import { ClapForm } from "../interfaces/clap.interface";
+import { ClapFormInput } from "../interfaces/clap.interface";
 
 const ClapForm = () => {
-  const { register, handleSubmit } = useForm<ClapForm>();
+  const { register, handleSubmit } = useForm<ClapFormInput>();
   const location = useLocation();
   const users : User[] = useLoaderData() as User[];
   const senderId = location.state.userId;
 
-  const handleClapForm = async (data: ClapForm) => {
-    const clapDataForm : ClapForm = {
+  const handleClapForm = async (data: ClapFormInput) => {
+    const authToken = localStorage.getItem("authToken");
+    const claps : ClapFormInput = {
       from_user_id: senderId,
       to_user_id: Number(data.to_user_id),
       num_claps: Number(data.num_claps),
       message: data.message
     }
-    await clapService.sendClaps(clapDataForm);
+    await clapService.sendClaps({claps, authToken});
   };
 
   return (
