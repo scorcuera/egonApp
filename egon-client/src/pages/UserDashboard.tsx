@@ -14,7 +14,8 @@ const UserDashboard = () => {
   const [claps, setClaps] = useState([]);
 
   const setModal = async (id: number) => {
-    const claps = await clapService.getAllReceivedClaps(id);
+    const authToken = localStorage.getItem("authToken");
+    const claps = await clapService.getAllReceivedClaps({id, authToken});
     setClaps(claps);
     setClapsModal(!clapsModal);
   }

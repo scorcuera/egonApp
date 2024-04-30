@@ -6,15 +6,20 @@ import {
   Th,
   Td,
   TableContainer,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 import { LazyMotion, domAnimation, m } from "framer-motion";
 
 const ClapsBoard = ({ claps }) => {
-  
   return (
     <LazyMotion features={domAnimation}>
-        <TableContainer initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} as={m.div}>
-          <Table variant='simple'>
+      {Array.isArray(claps) ? (
+        <TableContainer
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          as={m.div}
+        >
+          <Table variant="simple">
             <Thead>
               <Tr>
                 <Th isNumeric>Claps</Th>
@@ -32,13 +37,16 @@ const ClapsBoard = ({ claps }) => {
                     <Td>{clap.message}</Td>
                     <Td>{new Date(clap.sent_at).toLocaleDateString()}</Td>
                   </Tr>
-                )
+                );
               })}
             </Tbody>
           </Table>
         </TableContainer>
+      ) : (
+        claps.message
+      )}
     </LazyMotion>
-  )
-}
+  );
+};
 
-export default ClapsBoard
+export default ClapsBoard;
