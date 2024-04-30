@@ -11,12 +11,14 @@ const clapService = {
         const claps = await response.json();
         return claps;
     },
-    async sendClaps(claps : ClapForm) {
+    async sendClaps(data: any) {
+        const {claps, authToken} = data;
         const response = await fetch('http://localhost:3000/claps/', {
             method: 'POST',
             body: JSON.stringify(claps),
             headers: {
-                "Content-Type": "application/json",
+                'Authorization': `Bearer ${authToken}`,
+                "Content-Type": "application/json"
             },
         });
         const result = await response.json();
